@@ -25,7 +25,11 @@ jobs:
       run: |
         cd docs
         make html
-
+    - name: Create gh-pages branch
+      run: |
+        git checkout --orphan gh-pages
+        git rm -rf .
+    
     - name: Commit and push changes
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
