@@ -1,7 +1,7 @@
 setuptools
 setuptools_scm
 importlib-resources
-Sphinx
+Sphinx==3.2.1
 rinohtype
 ipython
 sphinx_rtd_theme

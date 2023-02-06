@@ -3,12 +3,64 @@
 ZTF - Digital Control using Z-transform 
 ============================================================
 
+.. image:: https://raw.githubusercontent.com/rahulbhadani/ZTF/main/ztf.png
+   :width: 600px
+   :align: left
 
+|
+|
+|
+|
+|
+|
+|
+|
+|
+|
 
-|
-|
-|
-|
+ZTF, stands for Z-domain transfer function, is a Python library to implement a transfer function based system for system modeling, and control.
+
+Installation
+^^^^^^^^^^^^^
+
+.. code-block:: bash
+
+   pip install ZTF
+
+Quick Start
+^^^^^^^^^^^^^^
+
+We can implement a PID controller block that takes a timeseries input in the loop and outputs controlled value in open-loop setting
+
+.. code-block:: python
+
+    from ZTF import PID
+    import math
+    import time
+
+    P = 12.2285752621432
+    I = 7.40871870543199
+    D = 4.88097496311707
+    N = 37.0569659936971
+    Ts = 0.05
+
+    pid = PID(P, I, D, N, Ts)
+    start_time = time.time()
+    out = 0
+    x = 0
+
+    print("Input, Output")
+    while True:
+        elapsed_time = time.time() - start_time
+        if elapsed_time >= 10.0:
+            break
+
+        t = elapsed_time
+        x = 3 * math.sin(t)
+        out = pid.processing(x)
+        print("{}, {}".format(x, out))
+        time.sleep(Ts)
+
 
 Contributing to the project
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
