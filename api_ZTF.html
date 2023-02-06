@@ -1,0 +1,335 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Class ZTF &mdash; ZTF 0.01 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "tex2jax_ignore|mathjax_ignore|document", "processClass": "tex2jax_process|mathjax_process|math|output_area"}})</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="ZTF - Digital Control using Z-transform" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> ZTF
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p><span class="caption-text">API</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Class <code class="code docutils literal notranslate"><span class="pre">ZTF</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="#class-pid">Class <code class="code docutils literal notranslate"><span class="pre">PID</span></code></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ZTF</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Class <code class="code docutils literal notranslate"><span class="pre">ZTF</span></code></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/api_ZTF.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<span class="target" id="module-ZTF"></span><section id="class-ztf">
+<h1>Class <code class="code docutils literal notranslate"><span class="pre">ZTF</span></code><a class="headerlink" href="#class-ztf" title="Permalink to this headline">¶</a></h1>
+<p>Import <code class="docutils literal notranslate"><span class="pre">ZTF</span></code> as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ZTF</span> <span class="kn">import</span> <span class="n">ZTF</span>
+</pre></div>
+</div>
+<p>for transfer function in Z-domain</p>
+<dl class="py class">
+<dt id="ZTF.ZTF">
+<em class="property">class </em><code class="sig-prename descclassname">ZTF.</code><code class="sig-name descname">ZTF</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num</span></em>, <em class="sig-param"><span class="n">den</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ZTF.ZTF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Z Transform implementation as difference equation.</p>
+<p>Z transform is defined as</p>
+<div class="math notranslate nohighlight">
+\[H(z) = \cfrac{Y(z)}{X(z)} = \cfrac{\sum_{i= 0}^n b_i z^i  }{ \sum_{j = 0}^m a_jz^j }\]</div>
+<p>which is implemented as difference equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>num</strong> : <cite>list</cite></dt><dd><p>Coefficients of the numerator in ascending order of the power of z.</p>
+</dd>
+<dt><strong>den</strong> : <cite>list</cite></dt><dd><p>Coefficients of the denominator in ascending order of the power of z.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ZTF.ZTF.print_coefficients">
+<code class="sig-name descname">print_coefficients</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#ZTF.ZTF.print_coefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print coefficients of the numerator and the denominator</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ZTF.ZTF.processing">
+<code class="sig-name descname">processing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ZTF.ZTF.processing" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dt><strong>x</strong> : <cite>double</cite></dt><dd><p>Input value for which next value y in the chain is to be predicted.</p>
+</dd>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The next predicted value for the given input <cite>x</cite> as per the transfer function.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>double</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="class-pid">
+<h1>Class <code class="code docutils literal notranslate"><span class="pre">PID</span></code><a class="headerlink" href="#class-pid" title="Permalink to this headline">¶</a></h1>
+<p>Import <code class="docutils literal notranslate"><span class="pre">PID</span></code> as:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ZTF</span> <span class="kn">import</span> <span class="n">PID</span>
+</pre></div>
+</div>
+<p>for Z-domain PID controller</p>
+<dl class="py class">
+<dt id="ZTF.PID">
+<em class="property">class </em><code class="sig-prename descclassname">ZTF.</code><code class="sig-name descname">PID</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">P</span></em>, <em class="sig-param"><span class="n">I</span></em>, <em class="sig-param"><span class="n">D</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">Ts</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ZTF.PID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implements a realizable discrete PID Control in the form of parallel structure consisting of three Z-transform blocks.</p>
+<div class="math notranslate nohighlight">
+\[H(Z) = P + I\cdot T_s\cdot \cfrac{1}{z-1} + D\cdot \cfrac{N}{1 + N\cdot T_s \cfrac{1}{z-1}  }\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>P</strong> : <cite>double</cite></dt><dd><p>Proportional term of a PID controller</p>
+</dd>
+<dt><strong>I</strong> : <cite>double</cite></dt><dd><p>Integrator term of a PID contoller</p>
+</dd>
+<dt><strong>D</strong> : <cite>double</cite></dt><dd><p>Derivative term of a PID controller</p>
+</dd>
+<dt><strong>N</strong> : <cite>double</cite></dt><dd><p>Filter coefficient for the derivative term</p>
+</dd>
+<dt><strong>Ts</strong> : <cite>double</cite></dt><dd><p>Sample time in seconds for digital PID controller</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ZTF.PID.processing">
+<code class="sig-name descname">processing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ZTF.PID.processing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value controlled value from the PID controller</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dt><strong>error</strong> : <cite>double</cite></dt><dd><p>Error term as an input the PID controller</p>
+</dd>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Returns the next control command</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>double</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="ZTF - Digital Control using Z-transform" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright Rahul Bhadani.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
