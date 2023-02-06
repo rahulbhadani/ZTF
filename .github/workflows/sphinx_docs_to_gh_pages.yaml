@@ -28,10 +28,12 @@ jobs:
         cd docs
         make html
         mv build/* ../..
+        git commit -m "generated new pages"
+        git push
     
-    - name: Commit and push changes
-      uses: stefanzweifel/git-auto-commit-action@v4
-      with:
-        commit_message: "Generate Documentation"
-        push: true
-        branch: gh-pages
+#    - name: Commit and push changes
+#      uses: stefanzweifel/git-auto-commit-action@v4
+#      with:
+#        commit_message: "Generate Documentation"
+#        push: true
+#        branch: gh-pages
