@@ -11,7 +11,7 @@ ZTF, stands for Z-domain transfer function, is a Python library to implement a t
 ## Installation
 
 ```{python}
-pip install ztf
+pip install ZTF
 ```
 
 ## Usage
