@@ -1,37 +1,35 @@
 name: Sphinx docs to gh-pages
-
 on:
   push:
     branches:
       - main
 
-# workflow_dispatch:        # Un comment line if you also want to trigger action manually
-
 jobs:
-  sphinx_docs_to_gh-pages:
+  build:
     runs-on: ubuntu-latest
-    name: Sphinx docs to gh-pages
+
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Make conda environment
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          python-version: 3.7    # Python version to build the html sphinx documentation
-          environment-file: devtools/conda-envs/docs_env.yaml    # Path to the documentation conda environment
-          auto-update-conda: false
-          auto-activate-base: false
-          show-channel-urls: true
-      - name: Installing the library
-        shell: bash -l {0}
-        run: |
-          python setup.py install
-      - name: Running the Sphinx to gh-pages Action
-        uses: uibcdf/action-sphinx-docs-to-gh-pages@v1.0.0
-        with:
-          branch: main
-          dir_docs: docs
-          sphinxapiopts: '--separate -o . ../'
-          sphinxapiexclude: '../*setup* ../*.ipynb'
-          sphinxopts: ''
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        pip install setuptools setuptools_scm importlib-resources Sphinx==3.2.1 rinohtype ipython sphinx_rtd_theme sphinx_autodoc_typehints recommonmark mkdocs sphinx_bootstrap_theme sphinx-markdown-parser pymdown-extensions m2r2 ytsphinx python-dotenv pycryptodomex pyyaml nbsphinx pandoc pandocfilters yolk3k
+
+
+    - name: Generate documentation
+      run: |
+        cd docs
+        make html
+
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Generate Documentation"
+        push: true
+        branch: gh-pages
