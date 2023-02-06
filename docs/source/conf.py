@@ -1,3 +1,12 @@
+import sys
+import os
+import inspect
+import logging
+from pathlib import Path
+from datetime import datetime
+from typing import Optional, Union, Mapping
+
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -49,6 +58,7 @@ extensions = [
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+master_doc = "index"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -64,15 +74,86 @@ exclude_patterns = []
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = dict(navigation_depth=1, titles_only=True)
 github_repo = "ZTF"
+# Add any paths that contain custom static files (such as style sheets) here,
+# relative to this directory. They are copied after the builtin static files,
+# so a file named "default.css" will overwrite the builtin "default.css".
+html_static_path = ['_static']
 
 htmlhelp_basename = "ZTFdoc"
 title_doc = f"{project} documentation"
 
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+
+latex_documents = [(master_doc, f"{project}.tex", title_doc, author, "manual")]
+man_pages = [(master_doc, project, title_doc, [author], 1)]
+texinfo_documents = [
+    (master_doc, project, title_doc, author, project, title, "Miscellaneous")
+]
+
+# -- GitHub URLs for class and method pages ------------------------------------------
+
+
+def get_obj_module(qualname):
+    """Get a module/class/attribute and its original module by qualname"""
+    modname = qualname
+    classname = None
+    attrname = None
+    while modname not in sys.modules:
+        attrname = classname
+        modname, classname = modname.rsplit(".", 1)
+
+    # retrieve object and find original module name
+    if classname:
+        cls = getattr(sys.modules[modname], classname)
+        modname = cls.__module__
+        obj = getattr(cls, attrname) if attrname else cls
+    else:
+        obj = None
+
+    return obj, sys.modules[modname]
+
+
+def get_linenos(obj):
+    """Get an object’s line numbers"""
+    try:
+        lines, start = inspect.getsourcelines(obj)
+    except TypeError:
+        return None, None
+    else:
+        return start, start + len(lines) - 1
+
+# set project_dir: project/docs/source/conf.py/../../.. → project/
+project_dir = Path(__file__).parent.parent.parent
+github_url_ZTF = "https://github.com/jmscslgroup/ZTF/tree/master"
+from pathlib import PurePosixPath
+
+
+def modurl(qualname):
+    """Get the full GitHub URL for some object’s qualname."""
+    obj, module = get_obj_module(qualname)
+    github_url = github_url_ZTF
+    path = PurePosixPath(Path(module.__file__).resolve().relative_to(project_dir))
+    start, end = get_linenos(obj)
+    fragment = f"#L{start}-L{end}" if start and end else ""
+    return f"{github_url}/{path}{fragment}"
+
+
+def api_image(qualname: str) -> Optional[str]:
+    path = Path(__file__).parent / f"{qualname}.png"
+    print(path, path.is_file())
+    return (
+        f".. image:: {path.name}\n   :width: 200\n   :align: right"
+        if path.is_file()
+        else ""
+    )
+
+
+# modify the default filters
+from jinja2.defaults import DEFAULT_FILTERS
+
+DEFAULT_FILTERS.update(modurl=modurl, api_image=api_image)
+
+# -- Override some classnames in autodoc --------------------------------------------
 
 import sphinx_autodoc_typehints
 from typing import Dict, List, Tuple
