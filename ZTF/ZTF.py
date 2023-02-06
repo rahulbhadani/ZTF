@@ -15,10 +15,9 @@ class ZTF:
 
     Z transform is defined as
 
-    $$
+    .. math::
+        H(z) = \cfrac{Y(z)}{X(z)} = \cfrac{\sum_{i= 0}^n b_i z^i  }{ \sum_{j = 0}^m a_jz^j }
 
-    H(z) = \cfrac{Y(z)}{X(z)} = \cfrac{\sum_{i= 0}^n b_i z^i  }{ \sum_{j = 0}^m a_jz^j }
-    $$
 
     which is implemented as difference equation.
 

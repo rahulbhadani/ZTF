@@ -14,11 +14,8 @@ class PID:
     """
     Implements a realizable discrete PID Control in the form of parallel structure consisting of three Z-transform blocks.
 
-    $$
-
-    H(Z) = P + I*T_s*\cfrac{1}{z-1} + D*\cfrac{N}{1 + N*T_s \cfrac{1}{z-1}  }
-
-    $$
+    .. math::
+        H(Z) = P + I\cdot T_s\cdot \cfrac{1}{z-1} + D\cdot \cfrac{N}{1 + N\cdot T_s \cfrac{1}{z-1}  }
 
     Parameters
     -----------

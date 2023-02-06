@@ -7,6 +7,27 @@ from datetime import datetime
 from typing import Optional, Union, Mapping
 
 
+from sphinx.application import Sphinx
+from sphinx.ext import autosummary
+
+# remove PyCharm’s old six module
+if "six" in sys.modules:
+    print(*sys.path, sep="\n")
+    for pypath in list(sys.path):
+        if any(p in pypath for p in ["PyCharm", "pycharm"]) and "helpers" in pypath:
+            sys.path.remove(pypath)
+    del sys.modules["six"]
+
+import matplotlib
+
+matplotlib.use("agg")
+
+HERE = Path(__file__).parent
+sys.path.insert(0, f"{HERE.parent.parent}")
+sys.path.insert(0, os.path.abspath("_ext"))
+
+logger = logging.getLogger(__name__)
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -41,6 +62,10 @@ release = '0.01'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
+
+needs_sphinx = "1.7"
+
+
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.doctest",
