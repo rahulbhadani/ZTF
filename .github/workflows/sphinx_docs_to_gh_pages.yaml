@@ -30,7 +30,7 @@ jobs:
       #uses: stefanzweifel/git-auto-commit-action@v4
       uses: JamesIves/github-pages-deploy-action@v4
       with:
-        folder: build
+        folder: docs/build/html
         # commit_message: "Generate Documentation"
         # push_options: '--force'
         # branch: gh-pages
