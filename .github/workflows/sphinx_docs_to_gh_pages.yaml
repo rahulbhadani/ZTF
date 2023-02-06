@@ -1,0 +1,38 @@
+name: Sphinx docs to gh-pages
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9.13
+
+    - name: Install dependencies
+      run: |
+        pip install setuptools setuptools_scm importlib-resources Sphinx==3.2.1 rinohtype==0.5.4 ipython==7.31.1 sphinx_rtd_theme sphinx_autodoc_typehints recommonmark==0.7.1 mkdocs==1.4.2 sphinx_bootstrap_theme==0.8.1 sphinx-markdown-parser==0.2.4 pymdown-extensions==9.10a2 m2r2==0.3.3.post2 ytsphinx python-dotenv==0.21.1 pycryptodomex==3.17 nbsphinx==0.8.12 pandoc==2.3 pandocfilters==1.5.0 yolk3k==0.9 jinja2-time==0.2.0 Jinja2==2.11.3 MarkupSafe==2.0.1 matplotlib
+
+    - name: Generate documentation
+      run: |
+        cd docs
+        make html
+    - name: Create gh-pages branch
+      run: |
+        git checkout --orphan gh-pages
+        git rm -rf .
+    
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "Generate Documentation"
+        push: true
+        branch: gh-pages
