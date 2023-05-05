@@ -110,6 +110,8 @@ Licensing
    :hidden:
 
    api_ZTF
+   api_tools
+   api_gatagenerator
    
 
 .. |PyPI| image:: https://img.shields.io/pypi/v/ZTF.svg
